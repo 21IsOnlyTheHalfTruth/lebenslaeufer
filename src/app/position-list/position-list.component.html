@@ -1,0 +1,55 @@
+
+  <form [formGroup]="positionForm" > <!-- (ngSubmit)="onSubmit()" -->
+      <div class="form-group">
+
+        
+        <div formArrayName="positionLine">
+            <div *ngFor="let position of positionForm.controls.positionLine.controls; let i=index">
+                <div>
+                    <hr>
+                    <br>
+                  <span>Position {{i + 1}}</span>
+                 <button *ngIf="positionForm.controls.positionLine.controls.length > 1" 
+                   class="btn btn-outline-danger btn-sm delete-pos" 
+                   (click)="removePos(i)">Position {{i + 1}} löschen</button>
+                 </div>
+
+                <div [formGroupName]="i">
+                    
+                    <div class="form-row">
+          
+                        <div class="col-3">
+                          <label for="from-pos">Von: </label> <input class="form-control" name="from-pos" type="text">
+                        </div>
+                        <div class="col-3">
+                          <label for="to-pos">bis: </label> <input class="form-control" name="to-pos" type="text">
+                        </div>
+                        <div class="col">
+                          <label for="comp-pos">Unternehmen: </label> 
+                          <input class="form-control" formControlName="company" name="comp-pos" type="text">
+                        </div>
+                   </div> 
+                    <div class="form-row">
+                      
+                        <div class="col editor">
+                            <quill-editor [modules]="editorOptions" formControlName="description"></quill-editor>
+                        </div>
+                    </div>
+
+                </div>
+           </div>
+               
+           
+           <div class="form-row">
+                  <div class="col align-self-start">
+                      <button class="btn btn-primary" (click)="addPos()">+ neue Position</button> 
+
+                  </div>
+          
+            <div class="col align-self-end">
+                <button type="submit" class="btn btn-success" (click)="onSubmit()">Submit</button>
+            </div>
+           </div>
+          </div>
+      </div>
+    </form>
