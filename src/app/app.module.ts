@@ -8,12 +8,17 @@ import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ContactDataComponent } from './contact-data/contact-data.component';
 import { PositionListComponent } from './position-list/position-list.component';
+import { GPdfComponent } from './g-pdf/g-pdf.component'; //do i need this?
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     ContactDataComponent,
-    PositionListComponent
+    PositionListComponent,
+    GPdfComponent
+
   ],
   imports: [
     BrowserModule, 

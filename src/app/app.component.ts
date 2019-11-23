@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Position } from './shared/models/position';
+
 
 @Component({
   selector: 'app-root',
@@ -7,7 +8,9 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent  {
-  title = "Lebensläufer";
 
+  submitDataHandler(posArr: Array<Position>) {
+    console.info(posArr);
+  }
 }
   
