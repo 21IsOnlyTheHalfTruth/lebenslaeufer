@@ -15,10 +15,6 @@ export class GPdfComponent implements OnInit {
   ngOnInit() {
   }
 
-  generatePdf(){
-    const documentDefinition = { content: 'This is an sample PDF printed with pdfMake' };
-    pdfMake.createPdf(documentDefinition).open();
-   }
-  
+ 
 
 }
