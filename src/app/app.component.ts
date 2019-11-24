@@ -5,6 +5,7 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import * as jsPDF from 'jspdf'
 import { timeout } from 'q';
+import { DataFetchService } from './shared/service/data-fetch.service';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -17,8 +18,13 @@ export class AppComponent {
   public dataForHMTL: Array<Position>;
   public printDoc= false;
 
+  constructor(private dfs: DataFetchService) {}
+
+  pdfButtonpressed(){
+    this.dfs.submitButtonPressed();
+  }
+
   submitDataHandler(posArr: Array<Position>) {
-    console.info(posArr)
     this.dataForHMTL = posArr;
     this.generatePdf()
     this.printDoc =true;

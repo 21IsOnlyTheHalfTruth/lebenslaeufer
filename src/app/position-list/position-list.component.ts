@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
 import { Position } from '../shared/models/position';
+import { DataFetchService } from '../shared/service/data-fetch.service';
 @Component({
   selector: 'app-position-list',
   templateUrl: './position-list.component.html',
@@ -23,7 +24,7 @@ export class PositionListComponent implements OnInit {
     /* QUILL EDITOR OPTIONS END */
 
   };
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private dfs: DataFetchService) {
 
   }
   ngOnInit() {
@@ -31,7 +32,9 @@ export class PositionListComponent implements OnInit {
       positionLine: this.formBuilder.array([
         this.initPos()])
     });
-
+   this.dfs.fetchData.subscribe(() => {
+    this.onSubmit();
+    })
   }
 
 
@@ -58,7 +61,8 @@ export class PositionListComponent implements OnInit {
       let posLine = formArr.at(i);
       positionsArr.push(new Position(posLine.value.company, posLine.value.description));
     }
-    this.submitData.emit(positionsArr);
+    this.dfs.submitPosArr(positionsArr)
+    this.submitData.emit(positionsArr); //this will be removed
 
   }
 

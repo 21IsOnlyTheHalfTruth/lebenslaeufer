@@ -3,14 +3,10 @@
     color: #5C5C5B;
     margin-bottom: 3rem;
     height: 50px;
-    padding: 25px 200px;
+    margin-top: 25px;
     }
 h3 {
     float:left;
-}
-.pdf{
-    float: right;
-    margin-right: 30%;
 }
 
 /* here comes the PDF stylings, beware... */
@@ -21,11 +17,15 @@ html * {
     font-family: Verdana, Tahoma !important;
     font-stretch:semi-expanded;
  }
- 
+
+
  @media print {
      html, body {
        width: 210mm;
        height: 297mm;
+     }
+     .closepdf{
+         display: none;
      }
  }
  

@@ -1,10 +1,20 @@
-<div class="header-bar" *ngIf="!printDoc">
-   <button class="btn btn-primary pdf" (click)="this.printDoc=FALSE">schließen</button> -->
-  <h2>
-     Lebens<span style="color: #F0801C">läufer</span>
-  </h2>
-</div>
+<button *ngIf="printDoc" class="btn btn-primary closepdf" (click)="this.printDoc=FALSE">schließen</button>
+<div class="container header-bar" *ngIf="!printDoc">
+    <div class="row">
+          <div class="col-4">
 
+                     <h2>Lebens<span style="color: #F0801C">läufer</span></h2>
+               
+         </div> 
+    
+         <div class="col-2">
+                <button (click)="pdfButtonpressed()" class="btn btn-primary">PDF Drucken</button>
+         </div>
+     </div>
+              
+              
+              
+</div>
 
 <div class="container" *ngIf="!printDoc">
    
@@ -15,11 +25,6 @@
 
 </div>
 
-
-
-
-
-<!-- class="TESTCLASS" -->
 <div  id="pdfTable" #pdfTable *ngIf="printDoc">
 
  
