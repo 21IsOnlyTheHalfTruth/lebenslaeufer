@@ -1,12 +1,12 @@
-<div class="header-bar">
-   <!--  <button class="btn btn-primary pdf" (click)="generatePdf()">PDF generieren</button> -->
+<div class="header-bar" *ngIf="!printDoc">
+   <button class="btn btn-primary pdf" (click)="this.printDoc=FALSE">schließen</button> -->
   <h2>
      Lebens<span style="color: #F0801C">läufer</span>
   </h2>
 </div>
 
 
-<div class="container">
+<div class="container" *ngIf="!printDoc">
    
   <app-contact-data></app-contact-data>
 <br>
@@ -14,3 +14,85 @@
   <app-position-list (submitData)="submitDataHandler($event)"></app-position-list>
 
 </div>
+
+
+
+
+
+<!-- class="TESTCLASS" -->
+<div  id="pdfTable" #pdfTable *ngIf="printDoc">
+
+ 
+    
+        <div class="header">
+                <h1>Vorname Nachname</h1>
+        
+                <ul>
+                        <li>Wohnort: Straße x/x, 1000 Wien</li>
+                        <li>Geburtsdatum: 0x. Monat Jahr</li>
+                        <li>Telefon: +43 664 / 0000000</li>
+                        <li>E-Mail: Email@mail.com</li>
+                        <li>Staatsbürgerschaft: Land</li>
+                    </ul>
+                 
+                   
+        </div>
+                   
+        
+
+            
+        <div class="main-section">
+                <h1>Berufserfahrung</h1>
+          <div class="position" [ngClass]="{'noline':((i+1)==this.dataForHMTL.length)}" *ngFor="let position of this.dataForHMTL; let i=index">
+
+                
+            <div>       
+                01/201x – laufend {{position.company}}
+              
+                <div  [innerHTML]=position.description></div> <!-- SECUIRTY BREACH;!!!!!! ONLY FOR TESTING -->
+                
+            </div>
+               
+        </div>
+
+        <br>
+        <br>
+
+        <div class="main-section nobreak" >
+                <h1>Skills</h1>
+
+                    <div class="skills">
+                    
+                            <h4>velit esse</h4>
+                            <ul>
+                                <li>co laboris nisi ut aliquip ex ea commodo consequat. Duis aute </li>  
+                                <li>co laboris nisi ut uis aute </li>
+                              
+                            </ul>
+                    </div>
+                    
+                  
+                    <div class="skills">
+                    
+                        <h4>velit esse</h4>
+                        <ul>
+                            <li>co laboris nisi ut aliquip ex ea commodo consequat. Duis aute </li>  
+                            <li>co laboris nisi ut uis aute </li>
+                          
+                        </ul>
+                    </div>
+                
+                    <div class="skills">
+                    
+                        <h4>velit esse</h4>
+                        <ul>
+                            <li>co laboris nisi ut aliquip ex ea commodo consequat. Duis aute </li>  
+                            <li>co laboris nisi ut uis aute </li>
+                          
+                        </ul>
+                    </div>
+            
+         </div>
+
+        </div>
+

@@ -56,7 +56,7 @@ export class PositionListComponent implements OnInit {
     let positionsArr: Array<Position> = [];
     for (let i = 0; i < formArr.length; ++i) {
       let posLine = formArr.at(i);
-      positionsArr.push(new Position(posLine.value.description, posLine.value.company));
+      positionsArr.push(new Position(posLine.value.company, posLine.value.description));
     }
     this.submitData.emit(positionsArr);
 
