@@ -27,3 +27,4 @@ import { PositionListComponent } from './position-list/position-list.component';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+//tohost ngrok http --host-header=rewrite 4200

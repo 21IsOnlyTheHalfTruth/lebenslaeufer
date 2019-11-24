@@ -1,5 +1,4 @@
-<form [formGroup]="positionForm">
-  <!-- (ngSubmit)="onSubmit()" -->
+<form [formGroup]="positionForm" (ngSubmit)="onSubmit(f)" #f>
   <div class="form-group">
 
 
@@ -18,23 +17,23 @@
           <div class="form-row">
 
             <div class="col-2">
-              <label for="from-pos">Von: </label> <input class="form-control" name="from-pos" type="text">
+              <label for="pos">Von: </label> <input class="form-control" formControlName="from" type="text">
             </div>
             <div class="col-2">
-              <label for="to-pos">bis: </label> <input class="form-control" name="to-pos" type="text">
+              <label for="pos">bis: </label> <input class="form-control" formControlName="to" type="text">
             </div>
 
             <div class="col-4">
-              <label for="comp-pos">Unternehmen: </label>
-              <input class="form-control" formControlName="company" name="comp-pos" type="text">
+              <label for="company">Unternehmen: </label>
+              <input class="form-control" formControlName="company" type="text">
             </div>
             
           </div>
 
           <div class="form-row">
               <div class="col-3">
-                  <label for="comp-rol">Rolle: </label>
-                  <input class="form-control"  name="comp-rol" type="text">
+                  <label for="role">Rolle: </label>
+                  <input class="form-control"  formControlName="role" type="text">
                 </div>
           </div>
           <div class="form-row">

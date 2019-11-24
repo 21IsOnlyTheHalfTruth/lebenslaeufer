@@ -8,8 +8,6 @@ import { DataFetchService } from '../shared/service/data-fetch.service';
   styleUrls: ['./position-list.component.scss']
 })
 export class PositionListComponent implements OnInit {
-  @Output() submitData: EventEmitter<Array<Position>> = new EventEmitter()
-
   positionForm: FormGroup;
 
   /* QUILL EDITOR OPTIONS */
@@ -42,7 +40,11 @@ export class PositionListComponent implements OnInit {
   initPos() {
     return this.formBuilder.group({
       description: [''],
-      company: ['']
+      company: [''],
+      role: [''],
+      from: [''],
+      to: ['']
+
     });
   }
   addPos() {
@@ -59,10 +61,10 @@ export class PositionListComponent implements OnInit {
     let positionsArr: Array<Position> = [];
     for (let i = 0; i < formArr.length; ++i) {
       let posLine = formArr.at(i);
-      positionsArr.push(new Position(posLine.value.company, posLine.value.description));
+      positionsArr.push(new Position(posLine.value.company,posLine.value.from, posLine.value.to, posLine.value.role, posLine.value.description));
     }
     this.dfs.submitPosArr(positionsArr)
-    this.submitData.emit(positionsArr); //this will be removed
+    
 
   }
 

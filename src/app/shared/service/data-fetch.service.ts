@@ -9,17 +9,27 @@ import { ContactData } from '../models/contactData';
 })
 export class DataFetchService {
   fetchData = new EventEmitter();
-
+  private contactData: ContactData;
+  private posArr: Position[];
   constructor() { }
 
   submitButtonPressed() {
     this.fetchData.emit();
+
   }
   submitPosArr(posArr: Position[]) {
+    this.posArr = posArr;
   }
 
   submitContactData(data: ContactData){
-    console.info("from service");
-    console.info(data)
+    this.contactData = data;
+  }
+  
+  getContactData() {
+    return this.contactData
+  }
+
+  getPosArr() {
+    return this.posArr;
   }
 }

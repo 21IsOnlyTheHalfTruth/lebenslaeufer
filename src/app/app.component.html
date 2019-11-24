@@ -21,7 +21,7 @@
   <app-contact-data></app-contact-data>
 <br>
 
-  <app-position-list (submitData)="submitDataHandler($event)"></app-position-list>
+  <app-position-list></app-position-list>
 
 </div>
 
@@ -30,14 +30,13 @@
  
     
         <div class="header">
-                <h1>Vorname Nachname</h1>
+                <h1>{{this.contdataForHMTL.name}}</h1>
         
                 <ul>
-                        <li>Wohnort: Straße x/x, 1000 Wien</li>
-                        <li>Geburtsdatum: 0x. Monat Jahr</li>
-                        <li>Telefon: +43 664 / 0000000</li>
-                        <li>E-Mail: Email@mail.com</li>
-                        <li>Staatsbürgerschaft: Land</li>
+                        <li>Wohnort: {{this.contdataForHMTL.street}}, {{this.contdataForHMTL.pcode}} {{this.contdataForHMTL.city}}</li>
+                        <li>Telefon: {{this.contdataForHMTL.tel}}</li>
+                        <li>E-Mail: {{this.contdataForHMTL.email}}</li>
+                       
                     </ul>
                  
                    
@@ -48,11 +47,11 @@
             
         <div class="main-section">
                 <h1>Berufserfahrung</h1>
-          <div class="position" [ngClass]="{'noline':((i+1)==this.dataForHMTL.length)}" *ngFor="let position of this.dataForHMTL; let i=index">
+          <div class="position" [ngClass]="{'noline':((i+1)==this.arrdataForHMTL.length)}" *ngFor="let position of this.arrdataForHMTL; let i=index">
 
                 
             <div>       
-                01/201x – laufend {{position.company}}
+                {{position.from}} – {{position.to}} <b>{{position.company}}</b> , <u>{{position.role}}</u>
               
                 <div  [innerHTML]=position.description></div> <!-- SECUIRTY BREACH;!!!!!! ONLY FOR TESTING -->
                 

@@ -9,20 +9,19 @@ import { ContactData } from '../shared/models/contactData';
   styleUrls: ['./contact-data.component.scss']
 })
 export class ContactDataComponent implements OnInit {
-
+  
   constructor(private dfs: DataFetchService) { }
-  contactData: FormGroup;
+  contactData = new FormGroup({
+    name: new FormControl(null),
+    email: new FormControl(null),
+    tel: new FormControl(null),
+    street: new FormControl(null),
+    pcode: new FormControl(null),
+    city: new FormControl(null),
+  });
 
   ngOnInit() {
    
-    this.contactData = new FormGroup({
-      name: new FormControl(null),
-      email: new FormControl(null),
-      tel: new FormControl(null),
-      street: new FormControl(null),
-      pcode: new FormControl(null),
-      city: new FormControl(null),
-    });
     this.dfs.fetchData.subscribe(() => {
       this.onSubmit();
       })
@@ -38,5 +37,6 @@ export class ContactDataComponent implements OnInit {
       this.contactData.value.tel)
     this.dfs.submitContactData(data);
   }
+    
 }
 

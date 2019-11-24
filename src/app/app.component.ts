@@ -6,6 +6,7 @@ import pdfFonts from 'pdfmake/build/vfs_fonts';
 import * as jsPDF from 'jspdf'
 import { timeout } from 'q';
 import { DataFetchService } from './shared/service/data-fetch.service';
+import { ContactData } from './shared/models/contactData';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -15,20 +16,28 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 })
 export class AppComponent {
   @ViewChild('pdfTable', {static: false}) pdfTable: ElementRef;
-  public dataForHMTL: Array<Position>;
+  public arrdataForHMTL: Array<Position>;
+  public contdataForHMTL: ContactData;
+
   public printDoc= false;
 
   constructor(private dfs: DataFetchService) {}
 
   pdfButtonpressed(){
     this.dfs.submitButtonPressed();
+    setTimeout( ()=>{ //to be changet to obseravble!
+      this.arrdataForHMTL = this.dfs.getPosArr();
+      this.contdataForHMTL = this.dfs.getContactData();
+      this.generatePdf()
+      this.printDoc =true;
+    }, 10)
+    console.info(this.arrdataForHMTL[0].from)
+
+
   }
 
-  submitDataHandler(posArr: Array<Position>) {
-    this.dataForHMTL = posArr;
-    this.generatePdf()
-    this.printDoc =true;
-  }
+ /*  submitDataHandler(posArr: Array<Position>) { // will be removed
+  } */
 
 
   generatePdf() {
