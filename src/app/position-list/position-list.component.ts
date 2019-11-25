@@ -39,11 +39,11 @@ export class PositionListComponent implements OnInit {
 
   initPos() {
     return this.formBuilder.group({
-      description: [''],
-      company: [''],
-      role: [''],
-      from: [''],
-      to: ['']
+      description: ['Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'],
+      company: ['agentex GmbH'],
+      role: ['Projektleiter'],
+      from: ['2010'],
+      to: ['2019']
 
     });
   }
@@ -65,7 +65,6 @@ export class PositionListComponent implements OnInit {
     }
     this.dfs.submitPosArr(positionsArr)
     
-
   }
 
 }

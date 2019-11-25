@@ -12,12 +12,12 @@ export class ContactDataComponent implements OnInit {
   
   constructor(private dfs: DataFetchService) { }
   contactData = new FormGroup({
-    name: new FormControl(null),
-    email: new FormControl(null),
-    tel: new FormControl(null),
-    street: new FormControl(null),
-    pcode: new FormControl(null),
-    city: new FormControl(null),
+    name: new FormControl("Michael Horvath"),
+    email: new FormControl("email@email.com"),
+    tel: new FormControl("0767/6782345"),
+    street: new FormControl("auf der Lände 3"),
+    pcode: new FormControl("1234"),
+    city: new FormControl("Hintertupfing"),
   });
 
   ngOnInit() {

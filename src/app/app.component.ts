@@ -4,7 +4,6 @@ import { Position } from './shared/models/position';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import * as jsPDF from 'jspdf'
-import { timeout } from 'q';
 import { DataFetchService } from './shared/service/data-fetch.service';
 import { ContactData } from './shared/models/contactData';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -21,19 +20,18 @@ export class AppComponent {
 
   public printDoc= false;
 
-  constructor(private dfs: DataFetchService) {}
+  constructor(private dfs: DataFetchService) {
+  }
 
   pdfButtonpressed(){
     this.dfs.submitButtonPressed();
     setTimeout( ()=>{ //to be changet to obseravble!
       this.arrdataForHMTL = this.dfs.getPosArr();
       this.contdataForHMTL = this.dfs.getContactData();
-      this.generatePdf()
       this.printDoc =true;
+      this.generatePdf()
+
     }, 10)
-    console.info(this.arrdataForHMTL[0].from)
-
-
   }
 
  /*  submitDataHandler(posArr: Array<Position>) { // will be removed
@@ -41,32 +39,30 @@ export class AppComponent {
 
 
   generatePdf() {
-    
+   
     setTimeout( ()=>{
       var doc = new jsPDF();
     
+      const pdfTable = this.pdfTable.nativeElement;
+
       const specialElementHandlers = {
         '#editor': function (element, renderer) {
           return true;
-        }
-      };
-  
-      const pdfTable = this.pdfTable.nativeElement;
-  
+        }};
+      
       doc.fromHTML(pdfTable.innerHTML, 15, 15, {
         width: 190,
         'elementHandlers': specialElementHandlers
       });
-      
-      doc.save("test")}
-    , 100)
+   
+      doc.save("test.pdf")
+    }, 500)
     
+  //  let documentDefinition = this.getDocumentDefinition(this.arrdataForHMTL)
+   // pdfMake.createPdf(documentDefinition).download();
   }
 
-
-
-
-  /*
+  
   //DOCDEFINTION
   getDocumentDefinition(posArr: Array<Position>) {
         //sessionStorage.setItem('resume', JSON.stringify(this.resume));
@@ -98,7 +94,7 @@ export class AppComponent {
                   text: 'GitHub: ' + this.resume.socialProfile,
                   link: this.resume.socialProfile,
                   color: 'blue',
-                } 
+                } */
               
               
                 {
@@ -109,7 +105,7 @@ export class AppComponent {
           
                 
               [
-                  this.getProfilePicObject()
+                 // this.getProfilePicObject()
                 ] 
               
             ],
@@ -135,6 +131,9 @@ export class AppComponent {
                 },
                 {
                   text: position.description,
+                },
+                {
+                  text: position.role,
                 }]
 
               ]
@@ -151,7 +150,6 @@ export class AppComponent {
         };
       }
 
-  
 
-*/
+
 }
