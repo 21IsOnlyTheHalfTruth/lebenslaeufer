@@ -18,14 +18,14 @@ export class AppComponent {
   public arrdataForHMTL: Array<Position>;
   public contdataForHMTL: ContactData;
 
-  public printDoc= false;
+  public printDoc= false; // show printable HTML site for chrome PDF print engine
 
   constructor(private dfs: DataFetchService) {
   }
 
   pdfButtonpressed(){
     this.dfs.submitButtonPressed();
-    setTimeout( ()=>{ //to be changet to obseravble!
+    setTimeout( ()=>{ //to be changed to obseravble!
       this.arrdataForHMTL = this.dfs.getPosArr();
       this.contdataForHMTL = this.dfs.getContactData();
       this.printDoc =true;
@@ -40,7 +40,8 @@ export class AppComponent {
 
   generatePdf() {
    
-    setTimeout( ()=>{
+    setTimeout( ()=>{ //replace with observable or promise!
+      //converting frontend to PDF with JS PDF
       var doc = new jsPDF();
     
       const pdfTable = this.pdfTable.nativeElement;
@@ -55,70 +56,75 @@ export class AppComponent {
         'elementHandlers': specialElementHandlers
       });
    
-      doc.save("test.pdf")
+      doc.save("jspdf.pdf")
     }, 500)
     
-  //  let documentDefinition = this.getDocumentDefinition(this.arrdataForHMTL)
-   // pdfMake.createPdf(documentDefinition).download();
+   let documentDefinition = this.getDocumentDefinition(this.arrdataForHMTL, this.contdataForHMTL)
+    pdfMake.createPdf(documentDefinition).download('makePDF'); //printing pdf with makepdf
   }
 
   
-  //DOCDEFINTION
-  getDocumentDefinition(posArr: Array<Position>) {
+  //DOCDEFINTION for MakePDF library
+  getDocumentDefinition(posArr: Array<Position>, contactData: ContactData) {
         //sessionStorage.setItem('resume', JSON.stringify(this.resume));
         return {
           content: [
             {
-              text: 'RESUME',
+              text: 'Lebenslauf',
               bold: true,
               fontSize: 15,
               alignment: 'center',
               margin: [0, 0, 0, 20]
-            },
+            }, {
             
-             /* columns: [
-                [{
-                  text: this.resume.name,
+              columns: [
+                {
+                  text: contactData.name,
                   style: 'name'
                 },
                 {
-                  text: this.resume.address
+                  text: contactData.street
                 },
                 {
-                  text: 'Email : ' + this.resume.email,
+                  text: 'Email : ' + contactData.email,
                 },
                 {
-                  text: 'Contant No : ' + this.resume.contactNo,
-                },
+                  text: 'Contant No : ' + contactData.tel,
+                }],
+              },
                 {
-                  text: 'GitHub: ' + this.resume.socialProfile,
-                  link: this.resume.socialProfile,
-                  color: 'blue',
-                } */
-              
-              
-                {
-                  text: 'Experience',
-                  style: 'header'
+                  text: 'Positionen',
+                  style: 'header',
+                  alignment: 'left'
                 },
+            
+               
                 this.getExperienceObject(posArr),
-          
-                
-              [
-                 // this.getProfilePicObject()
-                ] 
-              
-            ],
-          styles: {
+                  
+          ],
+               styles: {
             name: {
               fontSize: 16,
               bold: true
+            },
+            header: {
+              fontSize: 16,
+              bold: true,
+              alignment: 'center',
+              margin: [0, 0, 0, 20]
+            },
+            fromToCompany: {
+              width: '10%' ,
+              fontSize: 16,
+              bold: false,
+              columnGap: 10
             }
+            
           }
         }
   }
 
-      //return experience
+      //return experience, this function is used in the documentdefinition of makepdf above
       getExperienceObject(positionArr: Array<Position>) {
         const pos = [];
         positionArr.forEach(position => {
@@ -126,14 +132,30 @@ export class AppComponent {
             [{
               columns: [
                 [{
-                  text: position.company,
-                  style: 'Firma'
+                  text: position.from,
+                  style: 'fromToCompany'},
+                
+                 { text: "-",
+                  style: 'fromToCompany'
                 },
                 {
-                  text: position.description,
+                  text: position.to,
+                  style: 'fromToCompany'
+
+                },
+                {
+                  text: position.company,
+                  style: 'fromToCompany',
+                  bold: true
                 },
                 {
                   text: position.role,
+                  style: 'fromToCompany',
+                  decoration: 'underline'
+
+                },
+                {
+                  text: position.description,
                 }]
 
               ]
@@ -145,7 +167,13 @@ export class AppComponent {
             widths: ['*'],
             body: [
               ...pos
-            ]
+            ],
+                     
+          },
+          layout: {
+            
+            hLineColor: 'white',
+            vLineColor: 'red'
           }
         };
       }

@@ -12,7 +12,7 @@ export class ContactDataComponent implements OnInit {
   
   constructor(private dfs: DataFetchService) { }
   contactData = new FormGroup({
-    name: new FormControl("Michael Horvath"),
+    name: new FormControl("Test Person"),
     email: new FormControl("email@email.com"),
     tel: new FormControl("0767/6782345"),
     street: new FormControl("auf der Lände 3"),
