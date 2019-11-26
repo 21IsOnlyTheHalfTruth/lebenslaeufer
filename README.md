@@ -1,5 +1,6 @@
 # this is only a prototype!
-- its not developed clean
+- this is a very brief proof of concept for a resume generator
+
 
 ## Development server
 
