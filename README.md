@@ -1,5 +1,5 @@
 # this is only a prototype!
-- this is a very brief proof of concept for a resume generator
+- this is a very brief mockUp for a resume generator
 
 
 ## Development server
